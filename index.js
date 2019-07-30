@@ -1,9 +1,14 @@
-const http = require('http');
+// server.js
+const jsonServer = require('json-server')
 
-const server = http.createServer((request, response) => {
-    response.writeHead(200, {"Content-Type": "text/plain"});
-    response.end("Hello World!");
-});
+const server = jsonServer.create()
+
+const router = jsonServer.router('db.json')
+
+const middlewares = jsonServer.defaults()
+
+server.use(middlewares)
+server.use(router)
 
 const port = process.env.PORT || 1337;
 server.listen(port);
